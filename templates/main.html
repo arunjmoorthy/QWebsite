@@ -1,0 +1,260 @@
+{% load static %}
+
+{% include 'inc/head.inc.html' %}
+{% include 'inc/navbar.inc.html' %}
+
+
+<body>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModal-label" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myModalTitle">Result</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="myContent">
+                    <!--Modal content-->
+                </div>
+                <div class="modal-footer">
+                    <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+                    <button type="button" class="btn btn-info" data-dismiss="modal" aria-label="Close">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+  
+
+    <div class="container py-4">
+        <div class="card">
+            <!--tips: add .text-center,.text-right to the .card to change card text alignment-->
+            <div class="card-body px-0 py-5">
+                <form method="POST"  action="/" id="main-form" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row px-0 mx-0">
+                        <div class="col-sm-12 bg-sss text-dark py-3">
+                            <div class="custom-control custom-radio">
+                                <input class="custom-control-input" type="radio" name="form-steps" id="form-steps" value="specifying-parameters" {{specifyingParameters}} required>
+                                <label class="custom-control-label" for="form-steps">
+                                    Specifying parameters
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row my-2 p-3 collapse" id="form-step-1-input-code">
+                        <div class="col-sm-3">
+                            <div class="form-control d-flex">
+                                <label>n&nbsp;=</label>
+                                <input class="border-0 p-0 m-0 my-input ml-2" type="number" name="n" id="n" value="{{ response.n }}">
+                            </div> 
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="form-control d-flex">
+                                <label>k&nbsp;=</label>
+                                <input class="border-0 p-0 m-0 my-input ml-2" type="number" name="k" id="k" value="{{ response.k }}">
+                            </div> 
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="form-control d-flex">
+                                <label>d&nbsp;=</label>
+                                <input class="border-0 p-0 m-0 my-input ml-2" type="number" name="d" id="d" value="{{ response.d }}">
+                            </div> 
+                        </div>
+
+                    
+
+                        <div class="col-sm-3">
+                            <div class="form-control d-flex">
+                                <label>q&nbsp;=</label>
+                                <input class="border-0 p-0 m-0 my-input ml-2" type="number" name="q" id="q" value="{{ response.q }}">
+                            </div> 
+                        </div>
+                    </div>
+
+                    <div class="row px-0 mx-0 my-3">
+                        <div class="col-sm-12 bg-sss text-dark py-3">
+                            <div class="custom-control custom-radio">
+                                <input class="custom-control-input" type="radio" name="form-steps" id="form-steps2" value="input-code" {{inputCode}} required>
+                                <label class="custom-control-label" for="form-steps2">
+                                    Input code
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row my-2 p-3 collapse" id="form-step-2-input-code">
+                        <div class="col-sm-6">
+                            <div class="form-control d-flex">
+                                <label>Upload&nbsp;file&nbsp;&nbsp;</label>
+                                <input type="file" class="form-control-file my-0 py-0" name="myTxtFile" id="myTxtFile">
+                            </div> 
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="form-control d-flex">
+                                <label>q&nbsp;=</label>
+                                <input class="border-0 p-0 m-0 my-input ml-2" type="number" value="{{response.iq}}" name="iq" id="iq">
+                            </div> 
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="form-control d-flex">
+                                <label>p&nbsp;=</label>
+                                <input class="border-0 p-0 m-0 my-input ml-2" type="number" name="ip" value="{{response.ip}}" id="ip">
+                            </div> 
+                        </div>
+
+                        <div class="col-sm-12 mx-0">   
+                            <div class="row py-2 p-3 bg-sss px-0 mx-0 my-3">
+                                <div class="col-sm-4 d-flex">
+                                    <div class="form-check" style="margin: auto;">
+                                        <input class="form-check-input" type="radio" name="form-radio" value="canonical" checked>
+                                        <label class="form-check-label" for="exampleRadio1">
+                                            Canonical Form
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4 d-flex">
+                                    <div class="form-check" style="margin: auto;">
+                                        <input class="form-check-input" type="radio" name="form-radio" value="Invariant">
+                                        <label class="form-check-label" for="exampleRadio2">
+                                            Invariant Form
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4 d-flex">
+                                    <div class="form-check" style="margin: auto;">
+                                        <input class="form-check-input" type="radio" name="form-radio" value="mode-p-code">
+                                        <label class="form-check-label" for="exampleRadio2">
+                                            Mode P Code
+                                        </label>
+                                    </div>
+                                </div>
+
+                                
+                            </div>
+                        </div>
+                    </div>
+
+    
+
+                    <div class="row py-4">
+                        <div class="col-sm-4"></div>
+
+                        <div class="col-sm-4 px-5 text-center">
+                            <button type="submit" class="btn btn-success" style="width: 220px;">Run</button>
+                        </div>
+
+                        <div class="col-sm-4"></div>
+                    </div>
+
+                    <div class="row px-0 mx-0">
+                        <div class="col-sm-2">
+
+                        </div>
+
+                        <div class="col-sm-8">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <div class="row mt-0 py-2 pt-0 p-3">
+                                        <div class="col-sm-12">
+                                            <div class="form-group mt-0">
+                                                <textarea class="form-control" id="myResults" rows="2" placeholder="Result"></textarea>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" placeholder="d over q, d over p" value='{{ distance }}'>
+                                        </div>
+                
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" placeholder="Other promises(reduced p*)" value='{{ preserved }}'>
+                                        </div>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary" style="width: 220px;">Download</button>
+
+                                </div>
+                            </div>
+                        
+                        </div>
+
+                        <div class="col-sm-2">
+                            
+                        </div>
+                    </div>
+
+                  
+
+                   
+
+
+                   
+                
+                  
+    
+                    <!-- <input type="submit" style="padding-bottom:10px;background-color:dodgerblue;width:200px;margin-right:10px;" class="btn btn-secondary" value="Run"> -->
+                    <!-- <br /><br /> -->
+                </form>
+            </div>
+        </div>
+       
+        
+    </div>
+
+<script>
+    var result = "{{ response | safe }}";
+
+    if (result.length > 0) {
+        console.log(result);
+        $("#myResults").text(result);
+
+        if ("{{specifyingParameters}}".length > 0) {
+            $("#form-step-1-input-code").collapse("show");
+            $("#n, #k, #d, #q").prop('required', true);
+            $("#myTxtFile, #ip, #iq").prop('required', false);
+        }
+
+        if ("{{inputCode}}".length > 0) {
+            $("#form-step-2-input-code").collapse("show");
+            $("#myTxtFile, #ip, #iq").prop('required', true);
+            $("#n, #k, #d, #q").prop('required', false);
+        }
+
+    }
+
+    $("input[name='form-steps']").on('change', function () {
+        if ($(this).val() == "input-code") {
+            $("#form-step-2-input-code").collapse("show");
+            $("#myTxtFile, #ip, #iq").prop('required', true);
+            $("#n, #k, #d, #q").prop('required', false);
+            $("#form-step-1-input-code").collapse("hide");
+        }else{
+            $("#form-step-1-input-code").collapse("show");
+            $("#myTxtFile, #ip, #iq").prop('required', false);
+            $("#n, #k, #d, #q").prop('required', true);
+            $("#form-step-2-input-code").collapse("hide");
+        }
+    });
+
+
+    // $("#main-form").on("submit", function () {
+    //     // let selected_step = $("#form-steps2").prop('checked');
+    //     // let selected_step = $("#form-steps2").val('checked');
+
+
+    //     return false;
+    // });
+
+
+
+
+</script>
+
+</body>
